@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     static private Player S;
     public List<item> inventory; //= new List<item>();
 
+    private int flashlight_index; // I hate finding. // Only remembering. // NO FIND // ONLY REMEMBER
+
     /*
         So, the player class is going to be fairly simply, hopefully. I implemented a large portion of this game, before implementing this class. 
         All postion/perspective stuff is handled by main, and updated as the player gives input. So, there is no need to track location here. Although,
@@ -36,7 +38,13 @@ public class Player : MonoBehaviour
         item tempItem;
         tempItem.desc = desc;
         tempItem.flag = flag;
-        tempItem.index = inventory.Count - 1;
+
+        // I could make this a function. But why the heck would I do that? This is """easier"""".
+        if (flag == "flash_light_off") {
+            flashlight_index = inventory.Count; //- 1;
+        }
+
+        tempItem.index = inventory.Count; //- 1; // Silly me
         inventory.Add(tempItem);
         Debug.Log("initialize_option() called");
     }
@@ -44,7 +52,7 @@ public class Player : MonoBehaviour
     private bool isLight() {
         Debug.Log("isLight() called");
         for (int i = 0; i < inventory.Count; i++) {
-            if(inventory[i].flag == "flash_light") {
+            if(inventory[i].flag == "flash_light_on") {
                 Debug.Log("isLight returned true");
                 return true;
             }
@@ -53,7 +61,41 @@ public class Player : MonoBehaviour
         return false;
     }
 
+    private void toggleFlashlight() {
+        string scene_desc;
+        string item_desc;
+        string item_flag;
+        if( inventory[flashlight_index].flag == "flash_light_off") {
+            item_desc = "Flash Light (on)";
+            item_flag = "flash_light_on";
+            scene_desc = "You click the flashlight on.";
+            changeItem(item_desc, item_flag, flashlight_index);
+            Main.DISPLAY_TEXT(scene_desc);
+        }
+        else if( inventory[flashlight_index].flag == "flash_light_on") {
+            item_desc = "Flash Light (off)";
+            item_flag = "flash_light_off";
+            scene_desc = "You click the flashlight off.";
+            changeItem(item_desc, item_flag, flashlight_index);
+            Main.DISPLAY_TEXT(scene_desc);
+        }
+    }
+
+    private void changeItem(string desc, string flag, int index) {
+        item tempItem = new item();
+        tempItem.desc = desc;
+        tempItem.flag = flag;
+        tempItem.index = index; // Again do I need this value
+
+        inventory[index] = tempItem;
+  
+        // inventory[index].desc = desc;
+        // inventory[index].flag = flag;
+        // inventory[index].index = index; // Again do I need this value?
+    }
+
     static public void ADD_ITEM(string desc, string flag) {
+        Debug.Log("ADD_ITEM() called");
         S.add_item(desc, flag);
     }
 
@@ -61,6 +103,12 @@ public class Player : MonoBehaviour
         Debug.Log("IS_LIGHT() called");
         Debug.Log(S.isLight());
         return S.isLight();
+    }
+
+    static public void TOGGLE_FLASHLIGHT() {
+        Debug.Log("TOGGLE_FLASHLIGHT() called");
+        S.toggleFlashlight();
+        return;
     }
     
 }

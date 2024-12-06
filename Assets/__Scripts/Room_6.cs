@@ -205,6 +205,8 @@ public class Room_6 : Room
         return;
     }
     private void goWest() {
+        change_option("Follow the hallway west toward the Elevator", "go_west", 0, 0);
+        edges[0].dest.change_option("Follow the hallway eest toward the Kitchen", "go_east", 0, 2);
         Main.DISPLAY_ROOM( edges[0].dest );
         //Debug.Log("Method undefined: goWest()");
     }
@@ -216,6 +218,8 @@ public class Room_6 : Room
     }
 
     private void goSouth() {
+        change_option("Follow the hallway south toward the Rusty Room", "go_south", 0, 2);
+        edges[2].dest.change_option("Follow the hallway north toward the Kitchen", "go_north", 0, 1);
         Main.DISPLAY_ROOM( edges[2].dest );
         //Debug.Log("Method undefined: goEast()");
     }

@@ -61,7 +61,7 @@ public class Room_2 : Room
         string flag;
 
         // Option 1 - Use Door. 
-        optionDescription = "Go through the door"; // Take us to room 0
+        optionDescription = "Go through the door to the Starting Room"; // Take us to room 0
         flag = "go_door";
         initialize_option(optionDescription, flag, tempOptions);
 
@@ -97,12 +97,16 @@ public class Room_2 : Room
 
     private void goWest() {
         //Main.PASS_TIME();
+        change_option("Follow the hallway west toward the Generator", "go_west", 0, 1);
+        edges[1].dest.change_option("Follow the hallway east toward the Starting Room", "go_east", 0, 2);
         Main.DISPLAY_ROOM( edges[1].dest );
         //Debug.Log("Method undefined: goWest()");
     }
 
     private void goEast() {
         //Main.PASS_TIME();
+        change_option("Follow the hallway east toward the Rusty Room", "go_east", 0, 2);
+        edges[2].dest.change_option("Follow the hallway west toward the Starting Room", "go_west", 0, 1);
         Main.DISPLAY_ROOM( edges[2].dest );
         //Debug.Log("Method undefined: goEast()");
     }

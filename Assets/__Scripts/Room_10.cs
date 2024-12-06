@@ -138,9 +138,16 @@ public class Room_10 : Room
             Main.VISITED();
         }
         // Hope I don't break anything with this second condition
+        /*if( Player.IS_LIGHT() && activeScene.sceneDesc == scenes[0].sceneDesc) {
+            //Placeholder
+            activeScene = scenes[1];
+        }*/
         if( Player.IS_LIGHT() && activeScene.sceneDesc == scenes[0].sceneDesc) {
             //Placeholder
             activeScene = scenes[1];
+        }
+        else if( !Player.IS_LIGHT() ) {
+            activeScene = scenes[0];
         }
         return;
     }
@@ -157,6 +164,8 @@ public class Room_10 : Room
 
     private void itemUsed(string flag) {
         if(flag == "bolt_cutters" && activeScene.sceneDesc == scenes[2].sceneDesc) {optionSelected(flag); return;}
+        if(flag == "flash_light_off" ) {Player.TOGGLE_FLASHLIGHT(); return;} 
+        if(flag == "flash_light_on" ) {Player.TOGGLE_FLASHLIGHT(); return;} 
         Main.DISPLAY_ITEM_USELESS();
     }
 

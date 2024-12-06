@@ -287,7 +287,9 @@ public class Main : MonoBehaviour
         display_mode = "display_text";
         clear_options();
 
-        display_option("Go Back");
+        // We're changing this line here. Someone thought that these notifications were teleporting him, because he was pressing "Go Back" and being taken to a different room. So this may alleviate concern.
+        //display_option("Go Back");
+        display_option("Continue");
     }
 
     private void visited() {

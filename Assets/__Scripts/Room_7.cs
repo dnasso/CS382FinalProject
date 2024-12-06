@@ -224,12 +224,16 @@ public class Room_7 : Room
     }
 
     private void goWest() {
+        change_option("Follow the hallway west toward the Starting Room", "go_west", 0, 1);
+        edges[1].dest.change_option("Follow the hallway east toward the Rusty Room", "go_east", 0, 2);
         Main.DISPLAY_ROOM( edges[1].dest );
         //Debug.Log("Method undefined: goWest()");
     }
 
 
     private void goNorth() {
+        change_option("Follow the hallway north toward the Kitchen", "go_north", 0, 2);
+        edges[2].dest.change_option("Follow the hallway south toward the Rusty Room", "go_south", 0, 0);
         Main.DISPLAY_ROOM( edges[2].dest );
         //Debug.Log("Method undefined: goEast()");
     }
@@ -241,16 +245,25 @@ public class Room_7 : Room
         string optionDescription;
         string flag;
 
-        // Option 1 - Go West
+        
+        // Option 3 - Use Door. // Actually Option 1
+        // Indexing out of Order, fixed an issue with the code in the easiest possible way. Hopefully no one has to read this later :)
+        optionDescription = "Go through the rusty doorway";
+        flag = "go_door";
+        initialize_option(optionDescription, flag, tempOptions);
+        
+        // Option 1 - Go West // Actually Option 2
         initialize_option(scenes[0].options[1].desc, scenes[0].options[1].flag, tempOptions);
         
-        // Option 2 - Go North
+        // Option 2 - Go North // Actually Option 3
         initialize_option(scenes[0].options[2].desc, scenes[0].options[2].flag, tempOptions);
 
+        /*
         // Option 3 - Use Door. 
         optionDescription = "Go through the rusty doorway";
         flag = "go_door";
         initialize_option(optionDescription, flag, tempOptions);
+        */
 
         tempScene = scenes[0];
         tempScene.options = tempOptions;

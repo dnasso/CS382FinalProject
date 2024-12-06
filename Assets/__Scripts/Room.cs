@@ -43,13 +43,63 @@ public class Room : MonoBehaviour
         options.Add(tempOption);
         Debug.Log("initialize_option() called");
     }
+    
+    // I just needed to do this sooner
+    public void change_option(string desc, string flag, int scene_index, int option_index) {
+        List<option> tempOptions = new List<option>();
+        scene tempScene = new scene();
+        option tempOption = new option();
+
+        // Its starting to look like I need to start finding by now. But, alas, no find, only remember.
+        tempOption.desc = desc;
+        tempOption.flag = flag;
+
+        for(int i = 0; i < scenes[scene_index].options.Count; i++) {
+            if (i == option_index) {
+                initialize_option(desc, flag, tempOptions);
+            }
+            else {
+                initialize_option(scenes[scene_index].options[i].desc, scenes[scene_index].options[i].flag, tempOptions);
+            }
+        }
+        
+        tempScene = scenes[scene_index];
+        tempScene.options = tempOptions;
+        scenes[scene_index] = tempScene;
+
+        //Bandaid
+        activeScene = scenes[scene_index];
+
+        // It just makes sense
+    }
+
+    public void change_scene_desc(string desc, int scene_index) {
+        scene tempScene = new scene();
+
+        tempScene = scenes[scene_index];
+        
+        tempScene.sceneDesc = desc;
+
+        scenes[scene_index] = tempScene;
+    }
 
     public virtual void OPTION_SELECTED(string flag){
         return;
     }
     
+    // New idea. We make it so that this function can take an item like "Flashlight"
+    // That way we can define behaviour for the flashlight globaly
+    // This will only be over ridden in places with pre-existing definitions for this function
+    
+    // I'd like to define a function that can modify the flashlight. The question is, do I define most or all of it in the Player file. 
+    // I'm defining the interaction here.
+    // I have functions that can let me manipulate it from here. I would have to make some sort of weird global flashlight editing function if I made that function in Player.
+    
+    // I'm gonna be cursed. Why not. Only I'm working on this, I don't need to worry about driving anyone except myself insance.
     public virtual void ITEM_USED(string flag) {
         Debug.Log("ITEM_USED() called");
+        if(flag == "flash_light_off" ) {Player.TOGGLE_FLASHLIGHT(); return;} // Gross. I'm sorry. I know. // Actually nevermind // I need an index I don't have.
+        if(flag == "flash_light_on" ) {Player.TOGGLE_FLASHLIGHT(); return;} // Insert thousand yard stare meme here // #Consequencesofmyownactions :)
         Main.DISPLAY_ITEM_USELESS();
     }
 

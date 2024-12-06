@@ -143,6 +143,8 @@ public class Room_9 : Room
 
     private void itemUsed(string flag) {
         if(flag == "gas_can" && activeScene.sceneDesc == scenes[1].sceneDesc) {optionSelected(flag); return;}
+        if(flag == "flash_light_off" ) {Player.TOGGLE_FLASHLIGHT(); return;} 
+        if(flag == "flash_light_on" ) {Player.TOGGLE_FLASHLIGHT(); return;} 
         Main.DISPLAY_ITEM_USELESS();
     }
 

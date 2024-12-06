@@ -59,10 +59,6 @@ public class Room_12 : Room
         optionDescription = "Follow the hallway north"; // Take us to room 6
         flag = "go_north";
         initialize_option(optionDescription, flag, tempOptions);
-        
-        
-
-        
 
         activeScene.sceneDesc = roomDesc;
         activeScene.options = tempOptions;
@@ -79,12 +75,16 @@ public class Room_12 : Room
     // ===== These are action functions ===== //
 
     private void goSouth() {
+        change_option("Follow the hallway south toward the Rusty Room", "go_south", 0, 0);
+        edges[0].dest.change_option("Follow the hallway north toward the Kitchen", "go_north", 0, 2);
         Main.DISPLAY_ROOM( edges[0].dest );
         //Debug.Log("Method undefined: goWest()");
     }
 
 
     private void goNorth() {
+        change_option("Follow the hallway north toward the Kitchen", "go_north", 0, 1);
+        edges[1].dest.change_option("Follow the hallway south toward the Rusty Room", "go_south", 0, 2);
         Main.DISPLAY_ROOM( edges[1].dest );
         //Debug.Log("Method undefined: goEast()");
     }

@@ -139,6 +139,8 @@ public class Room_5 : Room
 
     // ===== These are action functions ===== //
     private void goWest() {
+        change_option("Follow the hallway west toward the Storage Room", "go_west", 0, 0);
+        edges[0].dest.change_option("Follow the hallway east toward the Elevator", "go_east", 0, 2);
         Main.DISPLAY_ROOM( edges[0].dest );
         //Debug.Log("Method undefined: goWest()");
     }
@@ -158,6 +160,8 @@ public class Room_5 : Room
     }
 
     private void goEast() {
+        change_option("Follow the hallway eest toward the Kitchen", "go_east", 0, 2);
+        edges[2].dest.change_option("Follow the hallway west toward the Elevator", "go_west", 0, 0);
         Main.DISPLAY_ROOM( edges[2].dest );
         //Debug.Log("Method undefined: goEast()");
     }

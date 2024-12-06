@@ -164,14 +164,14 @@ public class Room_11 : Room
 
         tempScene = scenes[2];
         tempScene.options = tempOptions;
-        tempScene.sceneDesc = "Inside the Freezer, you find rotten and spoiled meat. The power long since failed. There is nothing left here.";
+        tempScene.sceneDesc = "Inside the Freezer, you find rotten and spoiled meat. The power long since failed. There is nothing left here."; 
         scenes[2] = tempScene;
         activeScene = scenes[2];
         Main.DISPLAY_ROOM(this);
 
         desc = "You pick up the flashlight. After some testing, you discover it still works.";
-        itemDesc = "Flash Light";
-        itemFlag = "flash_light";
+        itemDesc = "Flash Light (off)";
+        itemFlag = "flash_light_off";
         Player.ADD_ITEM(itemDesc, itemFlag);
         Main.DISPLAY_TEXT(desc);
 

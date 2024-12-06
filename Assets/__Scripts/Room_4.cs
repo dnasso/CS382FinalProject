@@ -203,6 +203,8 @@ public class Room_4 : Room
         return;
     }
     private void goSouth() {
+        change_option("Follow the hallway south toward the Generator", "go_south", 0, 0);
+        edges[0].dest.change_option("Follow the hallway north toward the Storage Room", "go_north", 0, 1);
         Main.DISPLAY_ROOM( edges[0].dest );
         //Debug.Log("Method undefined: goSouth()");
     }
@@ -214,6 +216,8 @@ public class Room_4 : Room
     }
 
     private void goEast() {
+        change_option("Follow the hallway east toward the Elevator", "go_east", 0, 2);
+        edges[2].dest.change_option("Follow the hallway west toward the Storage Room", "go_west", 0, 0);
         Main.DISPLAY_ROOM( edges[2].dest );
         //Debug.Log("Method undefined: goEast()");
     }
